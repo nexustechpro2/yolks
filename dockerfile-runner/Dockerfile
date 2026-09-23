@@ -82,6 +82,9 @@ ENV BUILDAH_ISOLATION=chroot
 ENV STORAGE_DRIVER=vfs
 ENV BUILDAH_FORMAT=docker
 
+RUN echo "container:x:999:999::/home/container:/bin/sh" >> /etc/passwd \
+    && echo "container:x:999:" >> /etc/group
+
 ENTRYPOINT ["/usr/bin/tini", "-g", "--"]
 CMD ["/entrypoint.sh"]
 
