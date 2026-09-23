@@ -1,0 +1,92 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY FEATHERPANEL PANEL",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-09-23T00:00:00+00:00",
+    "name": "Dockerfile Runner",
+    "author": "admin@nexustechpro.com",
+    "description": "Run any project with a Dockerfile. Upload your project via SFTP, the panel will build and run it automatically using Buildah and Podman.",
+    "features": null,
+    "docker_images": {
+        "Dockerfile Runner": "ghcr.io/nexustechpro2/yolks:dockerfile-runner"
+    },
+    "file_denylist": [],
+    "startup": "/entrypoint.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\"done\": \"Starting container\"}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!/bin/bash\n# Nothing to install — user uploads their own project via SFTP\necho \"Dockerfile Runner ready.\"\necho \"Upload your project files via SFTP to get started.\"\necho \"Make sure your Dockerfile is in the root of your project.\"",
+            "container": "ghcr.io/nexustechpro2/yolks:dockerfile-runner",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Dockerfile Path",
+            "description": "Path to your Dockerfile relative to your project root. Default is 'Dockerfile'.",
+            "env_variable": "DOCKERFILE_PATH",
+            "default_value": "Dockerfile",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Port",
+            "description": "The port your application listens on inside the container.",
+            "env_variable": "SERVER_PORT",
+            "default_value": "8080",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|between:1024,65535",
+            "field_type": "text"
+        },
+        {
+            "name": "Build Args",
+            "description": "Custom build arguments passed to docker build. Format: --build-arg KEY=VALUE --build-arg KEY2=VALUE2",
+            "env_variable": "BUILD_ARGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:500",
+            "field_type": "text"
+        },
+        {
+            "name": "User Environment Variables",
+            "description": "Extra environment variables passed to your running container. Format: -e KEY=VALUE -e KEY2=VALUE2",
+            "env_variable": "USER_ENV",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:1000",
+            "field_type": "text"
+        },
+        {
+            "name": "Run Command Override",
+            "description": "Override the default CMD of your Dockerfile. Leave empty to use your Dockerfile's CMD.",
+            "env_variable": "RUN_CMD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:500",
+            "field_type": "text"
+        },
+        {
+            "name": "Extra Run Args",
+            "description": "Extra arguments passed to podman run. Format: --env-file=/home/container/.env",
+            "env_variable": "RUN_ARGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:500",
+            "field_type": "text"
+        }
+    ]
+}
