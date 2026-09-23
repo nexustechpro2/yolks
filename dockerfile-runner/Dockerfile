@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
     --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && chmod u+s /usr/bin/newuidmap /usr/bin/newgidmap
 
 # Configure buildah/podman storage — vfs works inside Wings without privileges
 RUN mkdir -p /etc/containers && cat > /etc/containers/storage.conf <<'EOF'
