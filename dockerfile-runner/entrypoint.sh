@@ -44,6 +44,12 @@ echo "[BUILD] Image name: ${IMAGE_NAME}"
 echo "[BUILD] Build args: ${BUILD_ARGS:-none}"
 echo ""
 
+# Register current UID so tools can resolve the current user
+if ! id "$(id -u)" &>/dev/null 2>&1; then
+    echo "container:x:$(id -u):$(id -g)::/home/container:/bin/sh" >> /etc/passwd
+    echo "[INFO] Registered UID $(id -u) in /etc/passwd"
+fi
+
 buildah bud \
     --isolation=chroot \
     --storage-driver=vfs \
