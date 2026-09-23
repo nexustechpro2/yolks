@@ -81,6 +81,7 @@ RUN chmod +x /entrypoint.sh
 ENV BUILDAH_ISOLATION=chroot
 ENV STORAGE_DRIVER=vfs
 ENV BUILDAH_FORMAT=docker
+ENV BUILDAH_STORAGE_DRIVER=vfs
 
 RUN echo "container:x:999:999::/home/container:/bin/sh" >> /etc/passwd \
     && echo "container:x:999:" >> /etc/group \
