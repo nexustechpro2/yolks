@@ -84,3 +84,4 @@ ENV BUILDAH_FORMAT=docker
 
 ENTRYPOINT ["/usr/bin/tini", "-g", "--"]
 CMD ["/entrypoint.sh"]
+
