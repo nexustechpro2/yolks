@@ -83,7 +83,9 @@ ENV STORAGE_DRIVER=vfs
 ENV BUILDAH_FORMAT=docker
 
 RUN echo "container:x:999:999::/home/container:/bin/sh" >> /etc/passwd \
-    && echo "container:x:999:" >> /etc/group
+    && echo "container:x:999:" >> /etc/group \
+    && echo "container:100000:65536" >> /etc/subuid \
+    && echo "container:100000:65536" >> /etc/subgid
 
 ENTRYPOINT ["/usr/bin/tini", "-g", "--"]
 CMD ["/entrypoint.sh"]
