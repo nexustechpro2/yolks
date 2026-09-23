@@ -53,6 +53,7 @@ fi
 buildah bud \
     --isolation=chroot \
     --storage-driver=vfs \
+    --no-pivot \
     --format=docker \
     --tag "${IMAGE_NAME}" \
     ${BUILD_ARGS:-} \
